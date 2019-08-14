@@ -3,14 +3,17 @@
 import sys
 
 def making_change(amount, denominations):
-    if 0 <= amount <= 1:
+  # base case
+    if amount < 0:
+      return 0
+    if amount == 1:
       return 1
-    ways = [1] + [0] * amount
+    waystoMakeChange = [1] + [0] * amount
 
     for c in denominations:
         for x in range(c, amount + 1):
-            ways[x] += ways[x - c]
-    return ways[amount]
+            waystoMakeChange[x] += waystoMakeChange[x - c]
+    return waystoMakeChange[amount]
 
 print(making_change(10, [1, 5, 10, 25, 50]))
 if __name__ == "__main__":
